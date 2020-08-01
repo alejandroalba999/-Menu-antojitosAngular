@@ -1,0 +1,60 @@
+
+
+<div style="margin: 5%; background-color:rgb(255, 165, 0,0.5); border: solid 1px;">
+  <h3 style="text-align: center;">Juanita y Don Miguel</h3>
+  <h5 style="text-align: center;">Gestion de Menu <p style="color: saddlebrown;">ANTOJITOS MEXICANOS</p></h5>
+</div>
+<div style="width: 40%;margin: 5%;">
+<form action="#" class="credit-card-div">
+  <div class="panel panel-default" >
+   <div class="panel-heading">
+       
+        <div class="row ">
+                <div class="col-md-12">
+                  <span class="help-block text-muted small-font" > Nombre de la Categoria</span>
+                    <input type="text" class="form-control" placeholder="Ingresar nombre de categoria" />
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class="col-md-12 pad-adjust">
+                  <span class="help-block text-muted small-font" > Descripción de la Categoria</span>
+                    <input type="text" class="form-control" placeholder="Ingresar descripción de la categoria" />
+                </div>
+            </div>
+       <div class="row">
+       </div>
+       <br>
+         <div class="row ">
+              <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                   <input type="submit"  class="btn btn-danger" value="CANCELAR" />
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                    <input type="submit"  class="btn btn-warning btn-block" value="AGREGAR" />
+                </div>
+            </div>
+       
+                     </div>
+                </div>
+  </form>
+</div>
+<div style="position: absolute; top: 40%; left: 50%; width: 50%;">
+<form action="" style="margin-right: 10%;">
+  <table class="table" >
+    <thead >
+      <tr>
+        
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let el of categoria.categoria">
+      <tr>
+        <td>{{el.strNombre}} </td>
+        <td>{{el.strDescripcion}}</td>
+       <td> <button type="button" class="btn btn-info">c:</button></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+</div>
