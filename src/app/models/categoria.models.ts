@@ -1,4 +1,6 @@
 export class CategoriaModels {
+    blnActivo: Boolean;
     strNombre:String;
-    StrDescripcion:String;
+    strDescripcion:String;
+    strFiltroNombre:String;
     }

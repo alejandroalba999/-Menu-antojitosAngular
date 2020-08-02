@@ -8,15 +8,7 @@ import {ServiciosService} from '../app/servicios.service'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   title = 'menu-front';
-  user : any = [];
-  constructor(public rest: ServiciosService, private route:ActivatedRoute, private router: Router ) { }
-  ngOnInit() {
-     console.log(this.rest)
-  }
-  getUser(){
-    this.user = [];
-    
-  }
+  
 }

@@ -3,6 +3,7 @@
 <div style="margin: 5%; background-color:rgb(255, 165, 0,0.5); border: solid 1px;">
   <h3 style="text-align: center;">Juanita y Don Miguel</h3>
   <h5 style="text-align: center;">Gestion de Menu <p style="color: saddlebrown;">ANTOJITOS MEXICANOS</p></h5>
+  
 </div>
 <div style="width: 40%;margin: 5%;">
 <form action="#" class="credit-card-div">
@@ -12,49 +13,90 @@
         <div class="row ">
                 <div class="col-md-12">
                   <span class="help-block text-muted small-font" > Nombre de la Categoria</span>
-                    <input type="text" class="form-control" placeholder="Ingresar nombre de categoria" />
+                    <input type="text" class="form-control" placeholder="Ingresar nombre de categoria" [(ngModel)]="cat.strNombre" name="cat.strNombre"/>
                 </div>
             </div>
             <br>
             <div class="row ">
                 <div class="col-md-12 pad-adjust">
                   <span class="help-block text-muted small-font" > Descripción de la Categoria</span>
-                    <input type="text" class="form-control" placeholder="Ingresar descripción de la categoria" />
+                    <input type="text" class="form-control" placeholder="Ingresar descripción de la categoria"[(ngModel)]="cat.strDescripcion"  name="cat.strDescripcion"/>
                 </div>
             </div>
        <div class="row">
        </div>
        <br>
          <div class="row ">
-              <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
-                   <input type="submit"  class="btn btn-danger" value="CANCELAR" />
+              <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-agregar">
+                   <button type="submit"  class="btn btn-danger" (click)="cancelar()">CANCELAR</button>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
-                    <input type="submit"  class="btn btn-warning btn-block" value="AGREGAR" />
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-editar" style="display: none;">
+                  <button type="submit"  class="btn btn-danger" (click)="reload()">CANCELAR</button>
+               </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-agregar">
+                    <button  type="submit"  class="btn btn-warning btn-block" (click)="registrar()">AGREGAR</button>
                 </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-guardar" style="display: none;">
+                  <button  type="submit"  class="btn btn-success btn-block" (click)="editarCategoria()">GUARDAR</button>
+              </div>
             </div>
        
                      </div>
                 </div>
   </form>
 </div>
-<div style="position: absolute; top: 40%; left: 50%; width: 50%;">
-<form action="" style="margin-right: 10%;">
-  <table class="table" >
+<button id="sinLlenar" type="button" class="btn btn-danger" style="margin-left: 15%; display: none;">{{this.error}}</button>
+<div class="container-md" >
+
+ <!-- Parte de busqueda -->
+  <div style="padding:1%; padding-left: 2%;position: absolute; top: 27%; left: 46%;">
+      <div id="funcion" class="funciones" >
+      <button style=" background-color: white; border: solid 1px; width: 100%;">PDF</button> <br>
+      <button style=" background-color: white;border: solid 1px; width: 100%;">EXCEL</button>
+      </div>
+    <input style="width: 100%;" type="text" class="form-control" placeholder="Nombre de la categoria" [(ngModel)]="cat.strFiltroNombre" name="cat"/>
+    <button style="position: absolute; top: 23%; left: 100%;" class="btn btn-info btn-sm" (click)="obtenerNombre()"><p style="width: 10%; height: 0;" class="glyphicon glyphicon-search"></p></button>
+    <button style="position: absolute; top: 30%; left: 80%; background-color: white; border: solid white;" class="glyphicon glyphicon-refresh" (click)="refresh()"></button>
+      <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" (click)="refresh()">...</button>
+  </div>
+  <!--Termina parte de busqueda -->
+
+  <!-- Actualizar y eliminar -->
+  <div class="export" id="exportar">
+    <button style=" background-color: white;border: solid 1px; width: 100%;" (click)="editar()"><p class="glyphicon glyphicon-edit"  style="left: -10%;"></p>Editar Categoria</button>
+    <form action="" style="padding-left: 5%; border: solid 1px;" >
+      <input  class="form-check-input" type="checkbox" (click)="desactivar()" checked>   
+        Activar/Desactivar 
+    </form>
+    <button style=" background-color: white; border: solid 1px; width: 100%;"><p class="glyphicon glyphicon-cog"  style="left: -6%;"></p>Gestionar Plantilla</button> <br>
+  </div>
+  <!-- Termina Actualizar y eliminar -->
+
+  <!-- Tabla de datos Categorias -->
+<div class="tabla" >
+<form action="" >
+  <table class="table">
     <thead >
-      <tr>
-        
+      <tr>  
         <th scope="col">Nombre</th>
         <th scope="col">Descripción</th>
       </tr>
     </thead>
-    <tbody *ngFor="let el of categoria.categoria">
-      <tr>
-        <td>{{el.strNombre}} </td>
-        <td>{{el.strDescripcion}}</td>
-       <td> <button type="button" class="btn btn-info">c:</button></td>
+    <tbody *ngFor="let el of categoria.categoria; let i = index">
+      <tr *ngIf="el.blnActivo == true">
+        <td><button (click)="obtener()" style="background-color: white; border: white solid;">{{el.strNombre | uppercase}}</button></td>
+        <td><button style="background-color: white; border: white solid;">{{el.strDescripcion}}</button></td>
+        <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" (click)="acciones(el._id)">...</button></td>
+      </tr>
+      <tr *ngIf="el.blnActivo == false" style="background-color: rgb(219, 60, 60,0.4)">
+        <td><button (click)="obtener()" style="background-color: transparent; border:none;" disabled>{{el.strNombre | uppercase}}</button></td>
+        <td><button style="background-color:transparent;border:none;" disabled>{{el.strDescripcion}}</button></td>
+        <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" (click)="acciones(el._id)">...</button></td>
       </tr>
     </tbody>
   </table>
 </form>
 </div>
+<!-- Termina Tabla de datos Categorias -->
+</div>
+
