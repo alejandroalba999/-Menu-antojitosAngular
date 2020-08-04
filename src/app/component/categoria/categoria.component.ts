@@ -115,7 +115,7 @@ export class CategoriaComponent implements OnInit {
       }
     })
   }
-  imrpimirLista(){
+imrpimirLista(){
 
 var doc = new jsPDF('portrait', 'px', 'a4');  
 window.document.getElementById("tablita").style.display = "inline";        

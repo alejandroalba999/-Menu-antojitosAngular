@@ -12,60 +12,78 @@
          
           <div class="row ">
                   <div class="col-md-12">
-                    <span class="help-block text-muted small-font" > Nombre de la Categoria</span>
-                      <input type="text" class="form-control" placeholder="Ingresar nombre del platillo" />
+                    <span class="help-block text-muted small-font" > Nombre del platillo</span>
+                      <input type="text" class="form-control" placeholder="Ingresar nombre del platillo"  [(ngModel)]="modelPlatillo.strNombre" name="modelPlatillo.strNombre"/>
                   </div>
               </div>
               <br>
               <div class="row ">
                   <div class="col-md-12 pad-adjust">
-                    <span class="help-block text-muted small-font" > Descripción de la Categoria</span>
-                      <input type="text" class="form-control" placeholder="Ingresar descripción de la categoria"/>
+                    <span class="help-block text-muted small-font" > Descripción del platillo</span>
+                      <input type="text" class="form-control" placeholder="Ingresar descripción de la categoria" [(ngModel)]="modelPlatillo.strDescripcion" name="modelPlatillo.strFiltroNombre"/>
                   </div>
               </div>
+              <div class="row ">
+                <div class="col-md-12 pad-adjust">
+                  <span class="help-block text-muted small-font" > Ingredientes del platillo</span>
+                    <input type="text" class="form-control" placeholder="Ingresar ingredientes del platillo" [(ngModel)]="modelPlatillo.strIngredientes" name="modelPlatillo.strIngredientes"/>
+                </div>
+            </div>
+            <div class="row ">
+              <div class="col-md-12 pad-adjust">
+                <span class="help-block text-muted small-font" > Numero de piezas</span>
+                  <input type="number" class="form-control" placeholder="Ingresar cantidad de piezas del platillo" [(ngModel)]="modelPlatillo.nmbPiezas" name="modelPlatillo.nbmPiezas"/>
+              </div>
+          </div>
+          <div class="row ">
+            <div class="col-md-12 pad-adjust">
+              <span class="help-block text-muted small-font" > Precio del platillo</span>
+                <input type="number" class="form-control" placeholder="Ingresar precio del platillo" [(ngModel)]="modelPlatillo.nmbPrecio" name="modelPlatillo.nbmPrecio"/>
+            </div>
+        </div>
          <div class="row">
          </div>
          <br>
            <div class="row ">
-                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-agregar">
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-agregarPlatillo">
                      <button type="submit"  class="btn btn-danger" >CANCELAR</button>
                   </div>
-                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-editar" style="display: none;">
+                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-editarPlatillo" style="display: none;">
                     <button type="submit"  class="btn btn-danger" >CANCELAR</button>
                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-agregar">
-                      <button  type="submit"  class="btn btn-warning btn-block" >AGREGAR</button>
+                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-agregarPlatillo">
+                      <button  type="submit"  class="btn btn-warning btn-block" (click)="registrarPlatillo()" >AGREGAR</button>
                   </div>
-                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-guardar" style="display: none;">
-                    <button  type="submit"  class="btn btn-success btn-block" >GUARDAR</button>
+                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-guardarPlatillo" style="display: none;">
+                    <button  type="submit"  class="btn btn-success btn-block" (click)="editarPlatillo()" >GUARDAR</button>
                 </div>
               </div>
          
                        </div>
                   </div>
     </form>
-  </div>
-  <button id="sinLlenar" type="button" class="btn btn-danger" style="margin-left: 15%; display: none;"></button>
+  
+  <button id="sinLlenar" type="button" class="btn btn-danger" style="margin-left: 25%; top:0%; display: none;">{{this.error}}</button>
   <div class="container-md" >
   
    <!-- Parte de busqueda -->
     <div style="padding:1%; padding-left: 2%;position: absolute; top: 27%; left: 46%;">
         <div id="funcion" class="funciones" >
-        <button style=" background-color: white; border: solid 1px; width: 100%;" >PDF</button> <br>
-        <button style=" background-color: white;border: solid 1px; width: 100%;" >EXCEL</button>
+        <button style=" background-color: white; border: solid 1px; width: 100%;" (click)="imrpimirLista()" >PDF</button> <br>
+        <button style=" background-color: white;border: solid 1px; width: 100%;" (click)="exportExcel('tablita')">EXCEL</button>
         </div>
       <input style="width: 100%;" type="text" class="form-control" placeholder="Nombre de la categoria" />
       <button style="position: absolute; top: 23%; left: 100%;" class="btn btn-info btn-sm" ><p style="width: 10%; height: 0;" class="glyphicon glyphicon-search"></p></button>
       <button style="position: absolute; top: 30%; left: 80%; background-color: white; border: solid white;" class="glyphicon glyphicon-refresh" ></button>
-        <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" >...</button>
+        <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" (click)="pdf_excel()">...</button>
     </div>
     <!--Termina parte de busqueda -->
   
     <!-- Actualizar y eliminar -->
-    <div class="export" id="exportar">
-      <button style=" background-color: white;border: solid 1px; width: 100%;" ><p class="glyphicon glyphicon-edit"  style="left: -10%;"></p>Editar Categoria</button>
+    <div class="export" id="exportarPlatillo">
+      <button (click)="editar()" style=" background-color: white;border: solid 1px; width: 100%;" ><p class="glyphicon glyphicon-edit"  style="left: -10%;"></p>Editar Categoria</button>
       <form action="" style="padding-left: 5%; border: solid 1px;" >
-        <input  class="form-check-input" type="checkbox"  checked>   
+        <input (click)="desactivarPlatillo()" class="form-check-input" type="checkbox"  checked>   
           Activar/Desactivar 
       </form>
       <button style=" background-color: white; border: solid 1px; width: 100%;"><p class="glyphicon glyphicon-cog"  style="left: -6%;"></p>Gestionar Plantilla</button> <br>
@@ -81,32 +99,35 @@
           <th scope="col">Nombre</th>
           <th scope="col">Descripción</th>
           <th scope="col">Ingredientes</th>
-          <th scope="col">Descripcion</th>
           <th scope="col">Piezas</th>
           <th scope="col">Precio</th>
+          <th></th>
         </tr>
       </thead>
-      <tbody *ngFor="let platillos of this.platillo; let i = item">
+      <tbody *ngFor="let platillos of this.platillo; let i = index;">
         <tr>
           <td style="font-size: 11px; background-color: rgb(255, 165, 0,0.4);width: 100%; margin:0; padding: 0;" colspan="7">Categoria : {{platillos.idCategoria.strNombre}}</td>
         </tr>
-        <tr>
-          <td><button  style="background-color: white; border: white solid;">{{platillos.strNombre}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.strIngredientes}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPrecio}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPiezas}}</button></td>
-          <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" >...</button></td>
+        <tr *ngIf="this.platillos.blnActivo === true">
+          <td><button  style="background-color: white; border: white solid;" disabled>{{platillos.strNombre}}</button></td>
+          <td><button style="background-color: white; border: white solid;" disabled>{{platillos.strDescripcion}}</button></td>
+          <td><button style="background-color: white; border: white solid;" disabled>{{platillos.strIngredientes}}</button></td>      
+         <!--Validar cantidad de piezas-->
+          <td>
+            <button *ngIf="platillos.nmbPiezas <= 1"  style="background-color: white; border: white solid; color: red;" disabled>{{platillos.nmbPiezas}}</button>
+            <button *ngIf="platillos.nmbPiezas > 1" style="background-color: white; border: white solid; color: green;" disabled>{{platillos.nmbPiezas}}</button>
+          </td>
+          <!--Validar cantidad de piezas-->
+          <td><button style="background-color: white; border: white solid;" disabled >${{platillos.nmbPrecio}}.00</button></td>
+          <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" (click)="acciones(platillos._id)">...</button></td>
         </tr>
         <tr  style="background-color: rgb(219, 60, 60,0.4)" *ngIf="this.platillos.blnActivo === false">
-          <td><button  style="background-color: white; border: white solid;">{{platillos.strNombre}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.strIngredientes}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPrecio}}</button></td>
-          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPiezas}}</button></td>
-          <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" >...</button></td>
+          <td><button  style="background-color: transparent; border: none;" disabled>{{platillos.strNombre}}</button></td>
+          <td><button style="background-color: transparent; border:none;" disabled>{{platillos.strDescripcion}}</button></td>
+          <td><button style="background-color: transparent; border: none;" disabled>{{platillos.strIngredientes}}</button></td>
+          <td><button style="background-color: transparent; border: none;" disabled>{{platillos.nmbPiezas}}</button></td>
+          <td><button style="background-color: transparent; border: none;" disabled>${{platillos.nmbPrecio}}.00</button></td>
+          <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}"(click)="acciones(platillos._id)" >...</button></td>
         </tr>
       </tbody>
     </table>
@@ -114,18 +135,28 @@
   </div>
   <!-- Termina Tabla de datos Categorias -->
   </div>
+  <br>
+  <br>
   <form id="tablita" style="display: none;" >
   <table class="table table-dark" >
     <thead>
       <tr>
+        <th scope="col">Categoria</th>
         <th scope="col">Nombre</th>
         <th scope="col">Descripción</th>
+        <th scope="col">Ingredientes</th>
+        <th scope="col">Piezas</th>
+        <th scope="col">Precio</th> 
       </tr>
     </thead>
-    <tbody >
+    <tbody *ngFor="let platillon of this.platillo">
       <tr>
-        <th></th>
-        <td></td>  
+        <td>{{platillon.idCategoria.strNombre}}</td>
+        <td>{{platillon.strNombre}}</td>
+        <td>{{platillon.strDescripcion}}</td> 
+        <td>{{platillon.strIngredientes}}</td> 
+        <td>{{platillon.nmbPiezas}}</td>  
+        <td>{{platillon.nmbPrecio}}</td>  
       </tr>
     </tbody>
   </table>

@@ -54,7 +54,7 @@
       <button style=" background-color: white; border: solid 1px; width: 100%;" (click)="imrpimirLista()">PDF</button> <br>
       <button style=" background-color: white;border: solid 1px; width: 100%;" (click)="exportExcel('tablita')">EXCEL</button>
       </div>
-    <input style="width: 100%;" type="text" class="form-control" placeholder="Nombre de la categoria" [(ngModel)]="cat.strFiltroNombre" name="cat"/>
+    <input style="width: 100%;" type="text" class="form-control" placeholder="Nombre de la categoria" [(ngModel)]="cat.strFiltroNombre" name="cat.strFiltroNombre"/>
     <button style="position: absolute; top: 23%; left: 100%;" class="btn btn-info btn-sm" (click)="obtenerNombre()"><p style="width: 10%; height: 0;" class="glyphicon glyphicon-search"></p></button>
     <button style="position: absolute; top: 30%; left: 80%; background-color: white; border: solid white;" class="glyphicon glyphicon-refresh" (click)="refresh()"></button>
       <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" (click)="pdf_excel()">...</button>
@@ -99,6 +99,8 @@
 </div>
 <!-- Termina Tabla de datos Categorias -->
 </div>
+<br>
+<br>
 <form id="tablita" style="display: none;" >
 <table class="table table-dark" >
   <thead>
