@@ -1,0 +1,29 @@
+.tabla{
+    position: absolute;
+    top: 39%; 
+    left: 50%;
+    width: 45%;
+    overflow-y:scroll;
+    height: 50%;
+    border: solid 1px rgb(175, 173, 173);
+    margin-left: -2%;
+    border-radius: 2%;
+}
+.export{
+    display: none;
+    position: fixed;
+    border: solid 1px;
+    top:50%;
+    right:2%;
+    background-color: white;
+    z-index: 1;
+    width: 13%;
+}
+.funciones{
+    display: none;
+    position:absolute;
+    border: solid 1px; 
+    top:-40%;
+    right:-65%;
+    background-color: white;
+}

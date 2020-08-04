@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {ServiciosService} from '../../servicios.service';
 @Component({
   selector: 'app-platillo',
   templateUrl: './platillo.component.html',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlatilloComponent implements OnInit {
 
-  constructor() { }
+  constructor(public rest : ServiciosService) { }
+ platillo: any = [];
 
-  ngOnInit(): void {
+  ngOnInit(){
+    console.log(localStorage.getItem("idCategoria"));
+    this.obtenerPlatillo();
   }
-
+obtenerPlatillo(){
+  this.rest.obtenerPlatilloIdCategoria(localStorage.getItem("idCategoria")).subscribe((data:{cont:{platillo}})=>{
+     console.log(data.cont.platillo);
+     this.platillo = data.cont.platillo;
+  })
+}
 }

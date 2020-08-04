@@ -2,7 +2,7 @@
 
 <div style="margin: 5%; background-color:rgb(255, 165, 0,0.5); border: solid 1px;">
   <h3 style="text-align: center;">Juanita y Don Miguel</h3>
-  <h5 style="text-align: center;">Gestion de Menu <p style="color: saddlebrown;">ANTOJITOS MEXICANOS</p></h5>
+  <h5 style="text-align: center;">Gestion de Menu Categorias <p style="color: saddlebrown;">ANTOJITOS MEXICANOS</p></h5>
   
 </div>
 <div style="width: 40%;margin: 5%;">
@@ -84,8 +84,8 @@
     </thead>
     <tbody *ngFor="let el of categoria.categoria; let i = index">
       <tr *ngIf="el.blnActivo == true">
-        <td><button (click)="imrpimirLista()" style="background-color: white; border: white solid;">{{el.strNombre | uppercase}}</button></td>
-        <td><button style="background-color: white; border: white solid;" >{{el.strDescripcion}}</button></td>
+        <td><button (click)="platillo(el._id)" style="background-color: white; border: white solid;">{{el.strNombre | uppercase}}</button></td>
+        <td><button (click)="platillo(el._id)" style="background-color: white; border: white solid;" >{{el.strDescripcion}}</button></td>
         <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" (click)="acciones(el._id)">...</button></td>
       </tr>
       <tr *ngIf="el.blnActivo == false" style="background-color: rgb(219, 60, 60,0.4)">

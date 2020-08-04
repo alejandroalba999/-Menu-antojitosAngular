@@ -1,1 +1,133 @@
-<p>platillo works!</p>
+
+
+<div style="margin: 5%; background-color:rgb(255, 165, 0,0.5); border: solid 1px;">
+    <h3 style="text-align: center;">Juanita y Don Miguel</h3>
+    <h5 style="text-align: center;">Gestion de Menu Platillos <p style="color: saddlebrown;">ANTOJITOS MEXICANOS</p></h5>
+    
+  </div>
+  <div style="width: 40%;margin: 5%;">
+  <form action="#" class="credit-card-div">
+    <div class="panel panel-default" >
+     <div class="panel-heading">
+         
+          <div class="row ">
+                  <div class="col-md-12">
+                    <span class="help-block text-muted small-font" > Nombre de la Categoria</span>
+                      <input type="text" class="form-control" placeholder="Ingresar nombre del platillo" />
+                  </div>
+              </div>
+              <br>
+              <div class="row ">
+                  <div class="col-md-12 pad-adjust">
+                    <span class="help-block text-muted small-font" > Descripción de la Categoria</span>
+                      <input type="text" class="form-control" placeholder="Ingresar descripción de la categoria"/>
+                  </div>
+              </div>
+         <div class="row">
+         </div>
+         <br>
+           <div class="row ">
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-agregar">
+                     <button type="submit"  class="btn btn-danger" >CANCELAR</button>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-editar" style="display: none;">
+                    <button type="submit"  class="btn btn-danger" >CANCELAR</button>
+                 </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-agregar">
+                      <button  type="submit"  class="btn btn-warning btn-block" >AGREGAR</button>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-guardar" style="display: none;">
+                    <button  type="submit"  class="btn btn-success btn-block" >GUARDAR</button>
+                </div>
+              </div>
+         
+                       </div>
+                  </div>
+    </form>
+  </div>
+  <button id="sinLlenar" type="button" class="btn btn-danger" style="margin-left: 15%; display: none;"></button>
+  <div class="container-md" >
+  
+   <!-- Parte de busqueda -->
+    <div style="padding:1%; padding-left: 2%;position: absolute; top: 27%; left: 46%;">
+        <div id="funcion" class="funciones" >
+        <button style=" background-color: white; border: solid 1px; width: 100%;" >PDF</button> <br>
+        <button style=" background-color: white;border: solid 1px; width: 100%;" >EXCEL</button>
+        </div>
+      <input style="width: 100%;" type="text" class="form-control" placeholder="Nombre de la categoria" />
+      <button style="position: absolute; top: 23%; left: 100%;" class="btn btn-info btn-sm" ><p style="width: 10%; height: 0;" class="glyphicon glyphicon-search"></p></button>
+      <button style="position: absolute; top: 30%; left: 80%; background-color: white; border: solid white;" class="glyphicon glyphicon-refresh" ></button>
+        <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" >...</button>
+    </div>
+    <!--Termina parte de busqueda -->
+  
+    <!-- Actualizar y eliminar -->
+    <div class="export" id="exportar">
+      <button style=" background-color: white;border: solid 1px; width: 100%;" ><p class="glyphicon glyphicon-edit"  style="left: -10%;"></p>Editar Categoria</button>
+      <form action="" style="padding-left: 5%; border: solid 1px;" >
+        <input  class="form-check-input" type="checkbox"  checked>   
+          Activar/Desactivar 
+      </form>
+      <button style=" background-color: white; border: solid 1px; width: 100%;"><p class="glyphicon glyphicon-cog"  style="left: -6%;"></p>Gestionar Plantilla</button> <br>
+    </div>
+    <!-- Termina Actualizar y eliminar -->
+  
+    <!-- Tabla de datos Categorias -->
+  <div  class="tabla" >
+  <form  action="" >
+    <table class="table"  >
+      <thead >
+        <tr>  
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Ingredientes</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Piezas</th>
+          <th scope="col">Precio</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let platillos of this.platillo; let i = item">
+        <tr>
+          <td style="font-size: 11px; background-color: rgb(255, 165, 0,0.4);width: 100%; margin:0; padding: 0;" colspan="7">Categoria : {{platillos.idCategoria.strNombre}}</td>
+        </tr>
+        <tr>
+          <td><button  style="background-color: white; border: white solid;">{{platillos.strNombre}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.strIngredientes}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPrecio}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPiezas}}</button></td>
+          <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" >...</button></td>
+        </tr>
+        <tr  style="background-color: rgb(219, 60, 60,0.4)" *ngIf="this.platillos.blnActivo === false">
+          <td><button  style="background-color: white; border: white solid;">{{platillos.strNombre}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.strIngredientes}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.strDescripcion}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPrecio}}</button></td>
+          <td><button style="background-color: white; border: white solid;" >{{platillos.nmbPiezas}}</button></td>
+          <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" >...</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div>
+  <!-- Termina Tabla de datos Categorias -->
+  </div>
+  <form id="tablita" style="display: none;" >
+  <table class="table table-dark" >
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr>
+        <th></th>
+        <td></td>  
+      </tr>
+    </tbody>
+  </table>
+  </form>
+  

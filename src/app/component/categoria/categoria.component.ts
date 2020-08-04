@@ -15,7 +15,7 @@ export class CategoriaComponent implements OnInit {
   error : any = [];
   categoria : any = [];
   
-  constructor(public rest: ServiciosService) { }
+  constructor(public rest: ServiciosService, public router : Router) { }
   cat: CategoriaModels = new CategoriaModels();
   
   ngOnInit() {
@@ -138,7 +138,7 @@ document.getElementById("funcion").style.display="none";
     var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
     
     // Specify file name
-    filename = filename?filename+'.xls':'excel_data.xls';
+    filename = filename?filename+'.xls':'categorias.xls';
     
     // Create download link element
     downloadLink = document.createElement("a");
@@ -160,5 +160,10 @@ document.getElementById("funcion").style.display="none";
         //triggering the function
         downloadLink.click();
     }
+}
+platillo(id){
+  localStorage.clear();
+  localStorage.setItem("idCategoria",id);
+  this.router.navigate(['platillo']);
 }
 }

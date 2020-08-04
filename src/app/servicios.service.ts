@@ -8,6 +8,7 @@ const endPoint = 'http://localhost:3000/api/'
 export class ServiciosService {
 
   constructor(private http: HttpClient) { }
+  //Apis para ruta Categoria//
   obtenerCategoria(): Observable <any>{
     return this.http.get(endPoint +'categoria/obtener');
    }
@@ -29,4 +30,30 @@ export class ServiciosService {
    activarCategoria(id): Observable <any>{
     return this.http.delete(endPoint +'categoria/activar/'+ id);
    }
+//Apis para ruta Categoria//
+
+//Apis para ruta Platillos//
+obtenerPlatillo(): Observable <any>{
+  return this.http.get(endPoint +'platillo/obtener');
+ }
+ obtenerPlatilloIdCategoria(idCategoria): Observable <any>{
+  return this.http.get(endPoint +'platillo/obtenerIdCategoria/'+ idCategoria);
+ }
+ obtenerPlatilloId(id): Observable <any>{
+  return this.http.get(endPoint +'platillo/obtenerId/'+ id);
+ }
+ agregarPlatillo(product): Observable <any>{
+  return this.http.post<any>(endPoint + 'platillo/registrar',product);
+ }
+ actualizarPlatillo(id, product): Observable <any>{
+  return this.http.put(endPoint + 'platillo/actualizar/' + id, product);
+ }
+ eliminarPlatillo(id): Observable <any>{
+  return this.http.delete(endPoint +'platillo/eliminar/'+ id);
+ }
+ activarPlatillo(id): Observable <any>{
+  return this.http.delete(endPoint +'platillo/activar/'+ id);
+ }
+//Apis para ruta Platillos//
+
 }
