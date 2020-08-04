@@ -3,6 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {CategoriaModels} from '../../models/categoria.models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ServiciosService} from '../../servicios.service'
+import * as jsPDF from 'jspdf';
+
+
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
@@ -12,7 +15,7 @@ export class CategoriaComponent implements OnInit {
   error : any = [];
   categoria : any = [];
   
-  constructor(public rest: ServiciosService, ) { }
+  constructor(public rest: ServiciosService) { }
   cat: CategoriaModels = new CategoriaModels();
   
   ngOnInit() {
@@ -23,6 +26,8 @@ export class CategoriaComponent implements OnInit {
   cancelar(){
     this.cat.strDescripcion = "";
     this.cat.strNombre = "";
+    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+    
   }
   obtener(){
     this.rest.obtenerCategoria().subscribe((data:{cont}) => {
@@ -110,4 +115,50 @@ export class CategoriaComponent implements OnInit {
       }
     })
   }
+  imrpimirLista(){
+
+var doc = new jsPDF('portrait', 'px', 'a4');  
+window.document.getElementById("tablita").style.display = "inline";        
+var source = window.document.getElementById("tablita");
+doc.fromHTML(source);
+setTimeout(function(){document.getElementById("tablita").style.display = "none"; }, 0.1);
+doc.save("categorias.pdf");
+document.getElementById("funcion").style.display="none";
+
+  }
+  pdf_excel(){
+    document.getElementById("funcion").style.display="inline"; 
+    setTimeout(function(){document.getElementById("funcion").style.display = "none"; }, 3500);
+  }
+  
+  exportExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
 }

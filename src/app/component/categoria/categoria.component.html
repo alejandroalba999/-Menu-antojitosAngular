@@ -51,13 +51,13 @@
  <!-- Parte de busqueda -->
   <div style="padding:1%; padding-left: 2%;position: absolute; top: 27%; left: 46%;">
       <div id="funcion" class="funciones" >
-      <button style=" background-color: white; border: solid 1px; width: 100%;">PDF</button> <br>
-      <button style=" background-color: white;border: solid 1px; width: 100%;">EXCEL</button>
+      <button style=" background-color: white; border: solid 1px; width: 100%;" (click)="imrpimirLista()">PDF</button> <br>
+      <button style=" background-color: white;border: solid 1px; width: 100%;" (click)="exportExcel('tablita')">EXCEL</button>
       </div>
     <input style="width: 100%;" type="text" class="form-control" placeholder="Nombre de la categoria" [(ngModel)]="cat.strFiltroNombre" name="cat"/>
     <button style="position: absolute; top: 23%; left: 100%;" class="btn btn-info btn-sm" (click)="obtenerNombre()"><p style="width: 10%; height: 0;" class="glyphicon glyphicon-search"></p></button>
     <button style="position: absolute; top: 30%; left: 80%; background-color: white; border: solid white;" class="glyphicon glyphicon-refresh" (click)="refresh()"></button>
-      <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" (click)="refresh()">...</button>
+      <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" (click)="pdf_excel()">...</button>
   </div>
   <!--Termina parte de busqueda -->
 
@@ -73,9 +73,9 @@
   <!-- Termina Actualizar y eliminar -->
 
   <!-- Tabla de datos Categorias -->
-<div class="tabla" >
-<form action="" >
-  <table class="table">
+<div  class="tabla" >
+<form  action="" >
+  <table class="table"  >
     <thead >
       <tr>  
         <th scope="col">Nombre</th>
@@ -84,8 +84,8 @@
     </thead>
     <tbody *ngFor="let el of categoria.categoria; let i = index">
       <tr *ngIf="el.blnActivo == true">
-        <td><button (click)="obtener()" style="background-color: white; border: white solid;">{{el.strNombre | uppercase}}</button></td>
-        <td><button style="background-color: white; border: white solid;">{{el.strDescripcion}}</button></td>
+        <td><button (click)="imrpimirLista()" style="background-color: white; border: white solid;">{{el.strNombre | uppercase}}</button></td>
+        <td><button style="background-color: white; border: white solid;" >{{el.strDescripcion}}</button></td>
         <td> <button type="button" class="btn btn-info btn-sm" id="accion{{i}}" (click)="acciones(el._id)">...</button></td>
       </tr>
       <tr *ngIf="el.blnActivo == false" style="background-color: rgb(219, 60, 60,0.4)">
@@ -99,4 +99,19 @@
 </div>
 <!-- Termina Tabla de datos Categorias -->
 </div>
-
+<form id="tablita" style="display: none;" >
+<table class="table table-dark" >
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripción</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let category of categoria.categoria">
+    <tr>
+      <th>{{category.strNombre}}</th>
+      <td>{{category.strDescripcion}}</td>  
+    </tr>
+  </tbody>
+</table>
+</form>
