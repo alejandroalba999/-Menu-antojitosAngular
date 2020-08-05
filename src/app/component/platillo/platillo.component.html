@@ -12,44 +12,45 @@
          
           <div class="row ">
                   <div class="col-md-12">
-                    <span class="help-block text-muted small-font" > Nombre del platillo</span>
+                    <span class="help-block text-muted small-font" > Nombre del platillo:</span>
                       <input type="text" class="form-control" placeholder="Ingresar nombre del platillo"  [(ngModel)]="modelPlatillo.strNombre" name="modelPlatillo.strNombre"/>
                   </div>
               </div>
               <br>
               <div class="row ">
                   <div class="col-md-12 pad-adjust">
-                    <span class="help-block text-muted small-font" > Descripción del platillo</span>
+                    <span class="help-block text-muted small-font" > Descripción del platillo:</span>
                       <input type="text" class="form-control" placeholder="Ingresar descripción de la categoria" [(ngModel)]="modelPlatillo.strDescripcion" name="modelPlatillo.strFiltroNombre"/>
                   </div>
               </div>
               <div class="row ">
                 <div class="col-md-12 pad-adjust">
-                  <span class="help-block text-muted small-font" > Ingredientes del platillo</span>
+                  <span class="help-block text-muted small-font" > Ingredientes del platillo:</span>
                     <input type="text" class="form-control" placeholder="Ingresar ingredientes del platillo" [(ngModel)]="modelPlatillo.strIngredientes" name="modelPlatillo.strIngredientes"/>
                 </div>
             </div>
+            <br>
             <div class="row ">
-              <div class="col-md-12 pad-adjust">
-                <span class="help-block text-muted small-font" > Numero de piezas</span>
-                  <input type="number" class="form-control" placeholder="Ingresar cantidad de piezas del platillo" [(ngModel)]="modelPlatillo.nmbPiezas" name="modelPlatillo.nbmPiezas"/>
+              <div class="col-md-12 pad-adjust" style="width: 40%;">
+                <span class="help-block text-muted small-font" > Numero de piezas:</span>
+                  <input type="number" class="form-control" placeholder="Ingresar cantidad" [(ngModel)]="modelPlatillo.nmbPiezas" name="modelPlatillo.nbmPiezas"/>
               </div>
-          </div>
-          <div class="row ">
-            <div class="col-md-12 pad-adjust">
-              <span class="help-block text-muted small-font" > Precio del platillo</span>
-                <input type="number" class="form-control" placeholder="Ingresar precio del platillo" [(ngModel)]="modelPlatillo.nmbPrecio" name="modelPlatillo.nbmPrecio"/>
+              <div class="row ">
+                <div class="col-md-12 pad-adjust" style="width: 40%; margin-left: 10%;">
+                  <span class="help-block text-muted small-font" > Precio del platillo $:</span>
+                    <input type="number" class="form-control" placeholder="Ingresar precio" [(ngModel)]="modelPlatillo.nmbPrecio" name="modelPlatillo.nbmPrecio"/>
+                </div>
             </div>
-        </div>
+          </div>
          <div class="row">
          </div>
          <br>
            <div class="row ">
                 <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-agregarPlatillo">
-                     <button type="submit"  class="btn btn-danger" >CANCELAR</button>
+                     <button type="submit"  class="btn btn-danger" (click)="cancelar()" >CANCELAR</button>
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="cancelar-editarPlatillo" style="display: none;">
-                    <button type="submit"  class="btn btn-danger" >CANCELAR</button>
+                    <button type="submit"  class="btn btn-danger"(click)="reload()" >CANCELAR</button>
                  </div>
                   <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust" id="btn-agregarPlatillo">
                       <button  type="submit"  class="btn btn-warning btn-block" (click)="registrarPlatillo()" >AGREGAR</button>
@@ -72,8 +73,7 @@
         <button style=" background-color: white; border: solid 1px; width: 100%;" (click)="imrpimirLista()" >PDF</button> <br>
         <button style=" background-color: white;border: solid 1px; width: 100%;" (click)="exportExcel('tablita')">EXCEL</button>
         </div>
-      <input style="width: 100%;" type="text" class="form-control" placeholder="Nombre de la categoria" />
-      <button style="position: absolute; top: 23%; left: 100%;" class="btn btn-info btn-sm" ><p style="width: 10%; height: 0;" class="glyphicon glyphicon-search"></p></button>
+      <input style="width: 100%;" type="text" class="form-control" placeholder="Busqueda" [(ngModel)]="searchText" name="searchText" />
       <button style="position: absolute; top: 30%; left: 80%; background-color: white; border: solid white;" class="glyphicon glyphicon-refresh" ></button>
         <button id="pdf" style="position: absolute; top: 23%; left: 120%;" class="btn btn-info btn-sm" (click)="pdf_excel()">...</button>
     </div>
@@ -104,7 +104,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody *ngFor="let platillos of this.platillo; let i = index;">
+      <tbody *ngFor="let platillos of this.platillo | filter: searchText ; let i = index;">
         <tr>
           <td style="font-size: 11px; background-color: rgb(255, 165, 0,0.4);width: 100%; margin:0; padding: 0;" colspan="7">Categoria : {{platillos.idCategoria.strNombre}}</td>
         </tr>

@@ -14,10 +14,18 @@ export class PlatilloComponent implements OnInit {
   modelPlatillo : PlatilloModels = new PlatilloModels();
   platillo: any = [];
   error: any = [];
+  searchText = '';
 
   ngOnInit(){
     console.log(localStorage.getItem("idCategoria"));
     this.obtenerPlatillo();
+  }
+  cancelar(){
+    this.modelPlatillo.strDescripcion = "";
+    this.modelPlatillo.strNombre = "";
+    this.modelPlatillo.nmbPiezas = "";
+    this.modelPlatillo.nmbPrecio = "";
+    this.modelPlatillo.strIngredientes = "";
   }
 obtenerPlatillo(){
   this.rest.obtenerPlatilloIdCategoria(localStorage.getItem("idCategoria")).subscribe((data:{cont:{platillo}})=>{
@@ -103,17 +111,14 @@ desactivarPlatillo(){
 }
 //***************Exportaciones en PDF y EXCEL *********************************//
 imrpimirLista(){
-  let idPlatillo = localStorage.getItem("idPlatillo");
-  this.rest.obtenerPlatilloId(idPlatillo).subscribe((data:{cont:{platillo}})=>{
-    let NombreCat = data.cont.platillo[0].idCategoria.strNombre;
+  let nombreCat = this.platillo[0].idCategoria.strNombre;
     var doc = new jsPDF('portrait', 'px', 'a4');  
   window.document.getElementById("tablita").style.display = "inline";        
   var source = window.document.getElementById("tablita");
   doc.fromHTML(source);
   setTimeout(function(){document.getElementById("tablita").style.display = "none"; }, 0.1);
-  doc.save(`platillosDe_${NombreCat}.pdf`);
+  doc.save(`platillosDe_${nombreCat}.pdf`);
   document.getElementById("funcion").style.display="none";
-  })
 
     }
     pdf_excel(){
@@ -122,9 +127,7 @@ imrpimirLista(){
     }
     
     exportExcel(tableID, filename = ''){
-      let idPlatillo = localStorage.getItem("idPlatillo");
-      this.rest.obtenerPlatilloId(idPlatillo).subscribe((data:{cont:{platillo}})=>{
-      let nombreCat =  data.cont.platillo[0].idCategoria.strNombre;
+      let nombreCat = this.platillo[0].idCategoria.strNombre;
       var downloadLink;
       var dataType = 'application/vnd.ms-excel';
       var tableSelect = document.getElementById(tableID);
@@ -153,9 +156,6 @@ imrpimirLista(){
           //triggering the function
           downloadLink.click();
       }
-      })
-
-      
   }
 
 }

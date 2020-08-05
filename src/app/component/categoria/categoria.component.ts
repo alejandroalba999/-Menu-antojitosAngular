@@ -14,7 +14,7 @@ import * as jsPDF from 'jspdf';
 export class CategoriaComponent implements OnInit {
   error : any = [];
   categoria : any = [];
-  
+  searchText = "";
   constructor(public rest: ServiciosService, public router : Router) { }
   cat: CategoriaModels = new CategoriaModels();
   
