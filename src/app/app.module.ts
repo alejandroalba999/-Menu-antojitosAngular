@@ -7,6 +7,7 @@ import { CategoriaComponent } from './component/categoria/categoria.component';
 import { FormsModule } from '@angular/forms';
 import { PlatilloComponent } from './component/platillo/platillo.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import {FileUploadModule} from 'ng2-file-upload';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

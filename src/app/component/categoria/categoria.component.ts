@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import {CategoriaModels} from '../../models/categoria.models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ServiciosService} from '../../servicios.service'
 import * as jsPDF from 'jspdf';
+
 
 
 @Component({
@@ -12,12 +13,33 @@ import * as jsPDF from 'jspdf';
   styleUrls: ['./categoria.component.css']
 })
 export class CategoriaComponent implements OnInit {
+
   error : any = [];
   categoria : any = [];
   searchText = "";
-  constructor(public rest: ServiciosService, public router : Router) { }
+  uploadedFiles: Array < File > ;
+  constructor(public rest: ServiciosService, public router : Router) {}
   cat: CategoriaModels = new CategoriaModels();
   
+  fileChange(element) {
+    this.uploadedFiles = element.target.files;
+    console.log(element.target.files);
+  }
+  
+  upload() {
+    let formData = new FormData();
+    for (var i = 0; i < this.uploadedFiles.length; i++) {
+      formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
+    }
+
+    this.rest.uploadFile(formData).subscribe((res)=> {
+     console.log(res);
+    });
+    }
+
+
+
+
   ngOnInit() {
     this.cat.blnActivo = true;
      this.obtener(); 
@@ -166,4 +188,5 @@ platillo(id){
   localStorage.setItem("idCategoria",id);
   this.router.navigate(['platillo']);
 }
+
 }

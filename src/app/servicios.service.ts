@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs'
+
 const endPoint = 'http://localhost:3000/api/'
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,10 @@ const endPoint = 'http://localhost:3000/api/'
 export class ServiciosService {
 
   constructor(private http: HttpClient) { }
+  //Subir archivo//
+   uploadFile(data): Observable <any>{
+    return this.http.post(endPoint +'upload/subir',data);
+   }
   //Apis para ruta Categoria//
   obtenerCategoria(): Observable <any>{
     return this.http.get(endPoint +'categoria/obtener');

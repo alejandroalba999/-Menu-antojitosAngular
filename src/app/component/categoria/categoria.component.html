@@ -78,7 +78,7 @@
     <thead >
       <tr>  
         <th scope="col">Nombre</th>
-        <th scope="col">Descripción</th>
+        <th scope="col">Descripcion</th>
       </tr>
     </thead>
     <tbody *ngFor="let el of categoria.categoria | filter: searchText ; let i = index">
@@ -96,6 +96,12 @@
   </table>
 </form>
 </div>
+
+<!-- Subir Archivos -->
+
+<!-- Subir Archivos -->
+
+
 <!-- Termina Tabla de datos Categorias -->
 </div>
 <br>
@@ -105,7 +111,7 @@
   <thead>
     <tr>
       <th scope="col">Nombre</th>
-      <th scope="col">Descripción</th>
+      <th scope="col">Descripcion</th>
     </tr>
   </thead>
   <tbody *ngFor="let category of categoria.categoria">
@@ -116,3 +122,34 @@
   </tbody>
 </table>
 </form>
+
+
+<div class="mainContainer">  
+  <div class="content">
+      <div class="header">
+          <h1>Angular File Upload</h1>
+      </div>
+      <div class="row margin25">
+
+          <div class="col-md-4">
+
+          </div>
+          <div class="col-md-4">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span>
+                  </div>
+                  <div class="custom-file">
+                      <form action="/api/upload" method="post" enctype="multipart/form-data">
+                          <input (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01"> 
+                      </form>
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+
+          </div>
+      </div>
+  </div>
+</div>  
