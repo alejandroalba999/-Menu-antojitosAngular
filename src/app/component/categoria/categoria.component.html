@@ -123,11 +123,11 @@
 </table>
 </form>
 
-
-<div class="mainContainer">  
+<p></p>
+<div class="mainContainer" style="border: solid black;">  
   <div class="content">
       <div class="header">
-          <h1>Angular File Upload</h1>
+          <h3>Subir Coleccion a Importar</h3>
       </div>
       <div class="row margin25">
 
@@ -136,14 +136,15 @@
           </div>
           <div class="col-md-4">
               <div class="input-group">
-                  <div class="input-group-prepend">
-                      <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span>
-                  </div>
                   <div class="custom-file">
                       <form action="/api/upload" method="post" enctype="multipart/form-data">
-                          <input (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01"> 
+                          <input (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01" [(ngModel)]="cat.strFile" name="cat.strFile"> 
                       </form>
-                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                      <div class="input-group-prepend">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+
+                        <button  class="btn btn-success btn-sm"  (click)="upload()"  id="btnUpload">Upload</button>
+                    </div>
                   </div>
               </div>
           </div>

@@ -22,19 +22,34 @@ export class CategoriaComponent implements OnInit {
   cat: CategoriaModels = new CategoriaModels();
   
   fileChange(element) {
-    this.uploadedFiles = element.target.files;
-    console.log(element.target.files);
+    
+    if(element.target.files[0].type == "application/vnd.ms-excel"){
+      this.uploadedFiles = element.target.files;
+      console.log (element.target.files[0].type);
+    }else{
+      alert("tipo de archivo no permitido");
+      this.cat.strFile = "";
+      console.log (element.target.files[0].type);
+    }
+
+
+
+    
   }
   
   upload() {
-    let formData = new FormData();
-    for (var i = 0; i < this.uploadedFiles.length; i++) {
-      formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
+    if(this.cat.strFile == undefined || this.cat.strFile == null || this.cat.strFile == ''){
+        alert("No fue seleccionado ningun archivo");
+    }else{
+      let formData = new FormData();
+      for (var i = 0; i < this.uploadedFiles.length; i++) {
+        formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
+      }
+      this.rest.uploadFile(formData).subscribe((res)=> {
+       console.log(res);
+      });
     }
-
-    this.rest.uploadFile(formData).subscribe((res)=> {
-     console.log(res);
-    });
+    
     }
 
 

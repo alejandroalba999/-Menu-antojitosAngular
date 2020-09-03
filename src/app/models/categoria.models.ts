@@ -3,4 +3,5 @@ export class CategoriaModels {
     strNombre:String;
     strDescripcion:String;
     strFiltroNombre:String;
+    strFile:String;
     }
